@@ -15,13 +15,14 @@ services:
 
   users-service:
     container_name: users-service
-    build: https://github.com/popas90/flask-microservices-users.git
+    build: https://github.com/realpython/flask-microservices-users.git
     expose:
-      - '5000' # expose ports - HOST:CONTAINER
+      - '5000'
     environment:
       - APP_SETTINGS=project.config.ProductionConfig
       - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_prod
       - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
+      - SECRET_KEY=${SECRET_KEY}
     depends_on:
       users-db:
         condition: service_healthy
